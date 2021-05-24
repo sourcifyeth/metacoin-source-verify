@@ -26,6 +26,7 @@ const config = {
       provider: () => new HDWalletProvider(privateKey, goerliAlchemy),
       network_id: 5,
       gas: 5500000,
+      gasPrice: 50000000000,
       skipDryRun: true
     }
   },
