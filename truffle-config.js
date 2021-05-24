@@ -6,6 +6,7 @@ const privateKey = process.env.PRIVATE_KEY;
 const ropstenInfura = `https://ropsten.infura.io/v3/${process.env.INFURA_ID}`;
 const rinkebyInfura = `https://rinkeby.infura.io/v3/${process.env.INFURA_ID}`;
 const goerliInfura =  `https://goerli.infura.io/v3/${process.env.INFURA_ID}`;
+const goerliAlchemy = `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
 
 const config = {
   networks: {
@@ -22,7 +23,7 @@ const config = {
       skipDryRun: true
     },
     goerli: {
-      provider: () => new HDWalletProvider(privateKey, goerliInfura),
+      provider: () => new HDWalletProvider(privateKey, goerliAlchemy),
       network_id: 5,
       gas: 5500000,
       skipDryRun: true
