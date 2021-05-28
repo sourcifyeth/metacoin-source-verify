@@ -12,7 +12,7 @@ async function main(){
     protocol: 'https'
   });
 
-  const artifactPaths = shell.ls('./build/contracts/*.json');
+  const artifactPaths = shell.ls('./build/contracts/{ConvertLib,MetaCoin}.json');
 
   log("Uploading sources & metadata to IPFS (Infura Gateway)...")
   log("========================================================")

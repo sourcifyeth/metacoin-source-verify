@@ -8,9 +8,10 @@
   },
   "scripts": {
     "ipfs": "node --no-warnings ./scripts/ipfs.js",
-    "deploy:ropsten": "truffle compile --all && npm run ipfs && truffle migrate --network ropsten",
-    "deploy:rinkeby": "truffle compile --all && npm run ipfs && truffle migrate --network rinkeby",
-    "deploy:goerli": "truffle compile --all && npm run ipfs && truffle migrate --network goerli"
+    "deploy:ropsten": "truffle compile --all && npm run ipfs && truffle migrate --f 1 --to 1 --network ropsten",
+    "deploy:rinkeby": "truffle compile --all && npm run ipfs && truffle migrate --f 1 --to 1 --network rinkeby",
+    "deploy:goerli": "truffle compile --all && npm run ipfs && truffle migrate --f 1 --to 1 --network goerli",
+    "deploy-with-salt:goerli": "./salt.sh && truffle compile --all && truffle migrate --f 2 --to 2 --network goerli"
   },
   "repository": {
     "type": "git",
