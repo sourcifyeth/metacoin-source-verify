@@ -8,10 +8,12 @@
   },
   "scripts": {
     "ipfs": "node --no-warnings ./scripts/ipfs.js",
-    "deploy:ropsten": "truffle compile --all && npm run ipfs && truffle migrate --f 1 --to 1 --network ropsten",
-    "deploy:rinkeby": "truffle compile --all && npm run ipfs && truffle migrate --f 1 --to 1 --network rinkeby",
-    "deploy:goerli": "truffle compile --all && npm run ipfs && truffle migrate --f 1 --to 1 --network goerli",
-    "deploy-with-salt:goerli": "./salt.sh && truffle compile --all && truffle migrate --f 2 --to 2 --network goerli"
+    "compile": "truffle compile --all",
+    "deploy:ropsten": "npm run compile && npm run ipfs && CHAIN=ropsten GAS_PRICE=$(./gas-price.sh) truffle migrate --f 1 --to 1 --network ropsten",
+    "deploy:rinkeby": "npm run compile && npm run ipfs && CHAIN=rinkeby GAS_PRICE=$(./gas-price.sh) truffle migrate --f 1 --to 1 --network rinkeby",
+    "deploy-with-salt:rinkeby": "./salt.sh && npm run compile && CHAIN=rinkeby GAS_PRICE=$(./gas-price.sh) truffle migrate --f 2 --to 2 --network rinkeby",
+    "deploy:goerli": "npm run compile && npm run ipfs && CHAIN=goerli GAS_PRICE=$(./gas-price.sh) truffle migrate --f 1 --to 1 --network goerli",
+    "deploy-with-salt:goerli": "./salt.sh && npm run compile && CHAIN=goerli GAS_PRICE=$(./gas-price.sh) truffle migrate --f 2 --to 2 --network goerli"
   },
   "repository": {
     "type": "git",
@@ -25,10 +27,11 @@
   },
   "homepage": "https://github.com/cgewecke/metacoin-source-verify#readme",
   "devDependencies": {
+    "@truffle/hdwallet-provider": "1.2.2",
     "dotenv": "^8.2.0",
     "ipfs-http-client": "^42.0.0",
     "shelljs": "^0.8.3",
     "truffle": "^5.1.14",
-    "@truffle/hdwallet-provider": "1.2.2"
+    "web3-eth": "^1.2.9"
   }
 }
