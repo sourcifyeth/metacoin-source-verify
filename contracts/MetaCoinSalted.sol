@@ -33,4 +33,3 @@ contract MetaCoinSalted is ConvertLib {
 	}
 }
 // add salt here:
-// salt: 17077 12703 13123 19132 31419
