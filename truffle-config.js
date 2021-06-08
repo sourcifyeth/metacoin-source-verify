@@ -2,7 +2,9 @@ require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 const privateKey = process.env.PRIVATE_KEY;
+console.log("Parsing GAS_PRICE variable:", process.env.GAS_PRICE);
 const gasPrice = parseInt(process.env.GAS_PRICE) || 50e9;
+console.log("Gas price", gasPrice);
 
 const ropstenURL = `https://ropsten.infura.io/v3/${process.env.INFURA_ID}`;
 
