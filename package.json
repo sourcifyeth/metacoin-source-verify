@@ -10,6 +10,7 @@
     "ipfs": "node --no-warnings ./scripts/ipfs.js",
     "compile": "truffle compile --all",
     "deploy:ropsten": "npm run compile && npm run ipfs && GAS_PRICE=$(CHAIN=ropsten ./gas-price.sh) truffle migrate --f 1 --to 1 --network ropsten",
+    "deploy-with-salt:ropsten": "./salt.sh && npm run compile && GAS_PRICE=$(CHAIN=ropsten ./gas-price.sh) truffle migrate --f 2 --to 2 --network ropsten",
     "deploy:rinkeby": "npm run compile && npm run ipfs && GAS_PRICE=$(CHAIN=rinkeby ./gas-price.sh) truffle migrate --f 1 --to 1 --network rinkeby",
     "deploy-with-salt:rinkeby": "./salt.sh && npm run compile && GAS_PRICE=$(CHAIN=rinkeby ./gas-price.sh) truffle migrate --f 2 --to 2 --network rinkeby",
     "deploy:goerli": "npm run compile && npm run ipfs && GAS_PRICE=$(CHAIN=goerli ./gas-price.sh) truffle migrate --f 1 --to 1 --network goerli",

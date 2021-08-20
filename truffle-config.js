@@ -6,7 +6,8 @@ console.log("Parsing GAS_PRICE variable:", process.env.GAS_PRICE);
 const gasPrice = parseInt(process.env.GAS_PRICE) || 50e9;
 console.log("Gas price", gasPrice);
 
-const ropstenURL = `https://ropsten.infura.io/v3/${process.env.INFURA_ID}`;
+// const ropstenURL = `https://ropsten.infura.io/v3/${process.env.INFURA_ID}`;
+const ropstenURL = `https://eth-ropsten.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
 
 // const rinkebyURL = `https://rinkeby.infura.io/v3/${process.env.INFURA_ID}`;
 const rinkebyURL = `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
