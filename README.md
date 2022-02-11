@@ -1,17 +1,17 @@
 ## Metacoin
 
-Simple project to test [ethereum/source-verify][1]'s chain monitor.
+Simple project to e2e test [sourcify.eth](https://github.com/ethereum/sourcify)'s chain monitor and verification.
 
-+ compiles Truffle's metacoin contracts with `truffle compile`
-+ uploads the generated metadata and corresponding Solidity sources to IPFS (via Infura gateway)
-+ deploys to either Ropsten or Rinkeby
+- If run with `npm run deploy-with-salt:${CHAIN_NAME}` adds salt to the simple `contracts/Metacoin.sol` to have different IPFS hash of the file. (verification-e2e job runs with salt, monitoring-e2e without)
+- compiles all contracts with `truffle compile`
+- uploads the generated metadata and corresponding Solidity sources to IPFS via Infura gateway (only on `npm run deploy:${CHAIN_NAME} i.e. monitoring-e2e).
+- deploys to either Ropsten, Rinkeby, or Goerli
 
-A running source-verify monitor will auto-detect this deployment and save entries to the
+A running Sourcify monitor will auto-detect this deployment and save entries to the
 metadata repository for the chain / addresses displayed in the Truffle migrations output.
 
-[1]: https://github.com/ethereum/source-verify
-
 ## Install
+
 ```
 npm install
 ```
@@ -19,21 +19,31 @@ npm install
 ## Configure
 
 You'll need to create a `.env` file in the project root and set values for
-+ an Infura project ID
-+ the private key to an account with a testnet ether balance
+
+- an Alchemy ID
+- the private key to an account with a testnet ether balance
 
 ```
-INFURA_ID=1d13168ffb894ad2827f...
+ALCHEMY_ID=1d13168ffb894ad2827f...
 PRIVATE_KEY=A4AA598CD030E2E22A9A3C...
 ```
 
 ## Deploy
 
 Your choice of:
+
 ```
 npm run deploy:ropsten
 npm run deploy:rinkeby
 npm run deploy:goerli
+```
+
+or with salted Metacoin.sol file:
+
+```
+npm run deploy-with-salt:ropsten
+npm run deploy-with-salt:rinkeby
+npm run deploy-with-salt:goerli
 ```
 
 **Example Output**
