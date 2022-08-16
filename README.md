@@ -4,8 +4,7 @@ Simple project to e2e test [sourcify.eth](https://github.com/ethereum/sourcify)'
 
 - If run with `npm run deploy-with-salt:${CHAIN_NAME}` adds salt to the simple `contracts/Metacoin.sol` to have different IPFS hash of the file. (verification-e2e job runs with salt, monitoring-e2e without)
 - compiles all contracts with `truffle compile`
-- uploads the generated metadata and corresponding Solidity sources to IPFS via Infura gateway (only on `npm run deploy:${CHAIN_NAME} i.e. monitoring-e2e).
-- deploys to either Ropsten, Rinkeby, or Goerli
+- deploys to either Rinkeby, or Goerli
 
 A running Sourcify monitor will auto-detect this deployment and save entries to the
 metadata repository for the chain / addresses displayed in the Truffle migrations output.
@@ -33,7 +32,6 @@ PRIVATE_KEY=A4AA598CD030E2E22A9A3C...
 Your choice of:
 
 ```
-npm run deploy:ropsten
 npm run deploy:rinkeby
 npm run deploy:goerli
 ```
@@ -41,7 +39,6 @@ npm run deploy:goerli
 or with salted Metacoin.sol file:
 
 ```
-npm run deploy-with-salt:ropsten
 npm run deploy-with-salt:rinkeby
 npm run deploy-with-salt:goerli
 ```

@@ -6,21 +6,12 @@ console.log("Parsing GAS_PRICE variable:", process.env.GAS_PRICE);
 const gasPrice = parseInt(process.env.GAS_PRICE) || 50e9;
 console.log("Gas price", gasPrice);
 
-const ropstenURL = `https://eth-ropsten.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
-
 const rinkebyURL = `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
 
 const goerliURL = `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
 
 const config = {
   networks: {
-    ropsten: {
-      provider: () => new HDWalletProvider(privateKey, ropstenURL),
-      network_id: 3,
-      gas: 500000,
-      gasPrice,
-      skipDryRun: true,
-    },
     rinkeby: {
       provider: () => new HDWalletProvider(privateKey, rinkebyURL),
       network_id: 4,
