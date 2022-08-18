@@ -7,8 +7,8 @@ const gasPrice = parseInt(process.env.GAS_PRICE) || 50e9;
 console.log("Gas price", gasPrice);
 
 const rinkebyURL = `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
-
 const goerliURL = `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_ID}`;
+const sepoliaURL = `https://rpc.sepolia.org`;
 
 const config = {
   networks: {
@@ -22,6 +22,13 @@ const config = {
     goerli: {
       provider: () => new HDWalletProvider(privateKey, goerliURL),
       network_id: 5,
+      gas: 500000,
+      gasPrice,
+      skipDryRun: true,
+    },
+    sepolia: {
+      provider: () => new HDWalletProvider(privateKey, sepoliaURL),
+      network_id: 11155111,
       gas: 500000,
       gasPrice,
       skipDryRun: true,
