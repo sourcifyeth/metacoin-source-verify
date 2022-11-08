@@ -11,7 +11,7 @@ else
         echo "Script requires variables ALCHEMY_ID for rinkeby and goerli"
         exit 1
     fi
-    URL=https://eth-$CHAIN.alchemyapi.io/v2/$ALCHEMY_ID
+    URL=https://eth-$CHAIN.g.alchemy.com/v2/$ALCHEMY_ID
 fi
 
 TMP=$(\
