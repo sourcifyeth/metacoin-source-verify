@@ -8,12 +8,12 @@
   },
   "scripts": {
     "compile": "truffle compile --all",
-    "deploy:rinkeby": "npm run compile && GAS_PRICE=$(CHAIN=rinkeby ./gas-price.sh) truffle migrate --f 1 --to 1 --network rinkeby",
-    "deploy-with-salt:rinkeby": "./salt.sh && npm run compile && GAS_PRICE=$(CHAIN=rinkeby ./gas-price.sh) truffle migrate --f 2 --to 2 --network rinkeby",
-    "deploy:goerli": "npm run compile && GAS_PRICE=$(CHAIN=goerli ./gas-price.sh) truffle migrate --f 1 --to 1 --network goerli",
-    "deploy-with-salt:goerli": "./salt.sh && npm run compile && GAS_PRICE=$(CHAIN=goerli ./gas-price.sh) truffle migrate --f 2 --to 2 --network goerli",
-    "deploy:sepolia": "npm run compile && GAS_PRICE=$(CHAIN=sepolia ./gas-price.sh) truffle migrate --f 1 --to 1 --network sepolia",
-    "deploy-with-salt:sepolia": "./salt.sh && npm run compile && GAS_PRICE=$(CHAIN=sepolia ./gas-price.sh) truffle migrate --f 2 --to 2 --network sepolia",
+    "deploy:rinkeby": "npm run compile && truffle migrate --f 1 --to 1 --network rinkeby",
+    "deploy-with-salt:rinkeby": "./salt.sh && npm run compile && truffle migrate --f 2 --to 2 --network rinkeby",
+    "deploy:goerli": "npm run compile && truffle migrate --f 1 --to 1 --network goerli",
+    "deploy-with-salt:goerli": "./salt.sh && npm run compile && truffle migrate --f 2 --to 2 --network goerli",
+    "deploy:sepolia": "npm run compile && truffle migrate --f 1 --to 1 --network sepolia",
+    "deploy-with-salt:sepolia": "./salt.sh && npm run compile && truffle migrate --f 2 --to 2 --network sepolia",
     "address": "truffle networks | grep MetaCoinSalted | sed 's/^.*MetaCoinSalted: \\(.*\\).*$/\\1/'",
     "address-improved": "truffle networks | ./extract-address.sh $1"
   },
@@ -29,9 +29,8 @@
   },
   "homepage": "https://github.com/cgewecke/metacoin-source-verify#readme",
   "devDependencies": {
-    "@truffle/hdwallet-provider": "1.2.2",
+    "@truffle/hdwallet-provider": "^2.1.2",
     "dotenv": "^8.6.0",
-    "truffle": "^5.1.14",
-    "web3-eth": "^1.2.9"
+    "truffle": "^5.6.7"
   }
 }

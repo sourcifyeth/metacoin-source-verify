@@ -2,9 +2,6 @@ require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 const privateKey = process.env.PRIVATE_KEY;
-console.log("Parsing GAS_PRICE variable:", process.env.GAS_PRICE);
-const gasPrice = parseInt(process.env.GAS_PRICE) || 50e9;
-console.log("Gas price", gasPrice);
 
 const goerliURL = `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_ID}`;
 const sepoliaURL = `https://rpc.sepolia.org`;
@@ -14,15 +11,19 @@ const config = {
     goerli: {
       provider: () => new HDWalletProvider(privateKey, goerliURL),
       network_id: 5,
-      gas: 500000,
-      gasPrice,
+      chain_id: 5,
+      maxFreePerGas: 500000000000, // 500 Gwei
+      maxPriorityFeePerGas: 2000000000, // 2 Gwei
+      gas: 500000, // Deployment normally takes 281135 gas
       skipDryRun: true,
     },
     sepolia: {
       provider: () => new HDWalletProvider(privateKey, sepoliaURL),
       network_id: 11155111,
-      gas: 500000,
-      gasPrice,
+      chain_id: 11155111,
+      maxFreePerGas: 500000000000, // 500 Gwei
+      maxPriorityFeePerGas: 2000000000, // 2 Gwei
+      gas: 500000, // Deployment normally takes 281135 gas
       skipDryRun: true,
     },
   },
