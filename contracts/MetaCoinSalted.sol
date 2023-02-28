@@ -34,3 +34,5 @@ contract MetaCoinSalted is ConvertLib {
 }
 // add salt here:
 // salt: 22116 16898 5422 23895 9915
+// salt: 5599 19959 19740 4107 6885
+// salt: 14995 8098 12245 29477 7303
