@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/cgewecke/metacoin-source-verify#readme",
   "devDependencies": {
-    "@truffle/hdwallet-provider": "^2.1.2",
+    "@truffle/hdwallet-provider": "^2.1.11",
     "dotenv": "^8.6.0",
-    "truffle": "^5.6.7"
+    "truffle": "^5.9.0"
   }
 }

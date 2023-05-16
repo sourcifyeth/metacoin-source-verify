@@ -4,7 +4,7 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const privateKey = process.env.PRIVATE_KEY;
 
 const goerliURL = `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_ID}`;
-const sepoliaURL = `https://rpc.sepolia.ethpandaops.io`;
+const sepoliaURL = `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_ID}`;
 
 const config = {
   networks: {
