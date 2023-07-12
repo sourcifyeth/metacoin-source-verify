@@ -1,36 +1,27 @@
 {
   "name": "metacoin-source-verify",
-  "version": "1.0.0",
-  "description": "",
-  "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
+  "version": "2.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
-    "compile": "truffle compile --all",
-    "deploy:rinkeby": "npm run compile && truffle migrate --f 1 --to 1 --network rinkeby",
-    "deploy-with-salt:rinkeby": "./salt.sh && npm run compile && truffle migrate --f 2 --to 2 --network rinkeby",
-    "deploy:goerli": "npm run compile && truffle migrate --f 1 --to 1 --network goerli",
-    "deploy-with-salt:goerli": "./salt.sh && npm run compile && truffle migrate --f 2 --to 2 --network goerli",
-    "deploy:sepolia": "npm run compile && truffle migrate --f 1 --to 1 --network sepolia",
-    "deploy-with-salt:sepolia": "./salt.sh && npm run compile && truffle migrate --f 2 --to 2 --network sepolia",
-    "address": "truffle networks | grep MetaCoinSalted | sed 's/^.*MetaCoinSalted: \\(.*\\).*$/\\1/'",
-    "address-improved": "truffle networks | ./extract-address.sh $1"
+    "deploy:sepolia": "hardhat run scripts/1_deploy_contracts.js --network sepolia",
+    "deploy-with-salt:sepolia": "hardhat run scripts/2_deploy_salted.js --network sepolia",
+    "deploy:goerli": "hardhat run scripts/1_deploy_contracts.js --network goerli"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cgewecke/metacoin-source-verify.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cgewecke/metacoin-source-verify/issues"
-  },
-  "homepage": "https://github.com/cgewecke/metacoin-source-verify#readme",
   "devDependencies": {
-    "@truffle/hdwallet-provider": "^2.1.11",
-    "dotenv": "^8.6.0",
-    "truffle": "^5.10.2"
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@nomicfoundation/hardhat-verify": "^1.0.0",
+    "@typechain/ethers-v6": "^0.4.0",
+    "@typechain/hardhat": "^8.0.0",
+    "chai": "^4.2.0",
+    "ethers": "^6.4.0",
+    "hardhat": "^2.16.1",
+    "hardhat-gas-reporter": "^1.0.8",
+    "solidity-coverage": "^0.8.0",
+    "typechain": "^8.1.0",
+    "dotenv": "^16.3.1"
   }
 }
