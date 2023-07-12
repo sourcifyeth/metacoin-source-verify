@@ -6,7 +6,8 @@
   "scripts": {
     "deploy:sepolia": "hardhat run scripts/1_deploy_contracts.js --network sepolia",
     "deploy-with-salt:sepolia": "hardhat run scripts/2_deploy_salted.js --network sepolia",
-    "deploy:goerli": "hardhat run scripts/1_deploy_contracts.js --network goerli"
+    "deploy:goerli": "hardhat run scripts/1_deploy_contracts.js --network goerli",
+    "deploy-with-salt:goerli": "hardhat run scripts/2_deploy_salted.js --network goerli"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
