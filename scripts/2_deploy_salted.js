@@ -22,7 +22,14 @@ async function appendTimestamp(file) {
 async function main() {
   await appendTimestamp("contracts/MetaCoinSalted.sol");
   await hre.run("compile");
-  const MetaCoinSalted = await hre.ethers.deployContract("MetaCoinSalted");
+
+  const feeData = await hre.ethers.provider.getFeeData();
+  const Contract = await hre.ethers.getContractFactory("MetaCoinSalted");
+  const MetaCoinSalted = await Contract.deploy({
+    maxPriorityFeePerGas: feeData.maxPriorityFeePerGas,
+    maxFeePerGas: feeData.maxFeePerGas,
+    type: 2,
+  });
   await MetaCoinSalted.waitForDeployment();
 
   const address = await MetaCoinSalted.target;
