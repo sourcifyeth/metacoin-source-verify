@@ -1,7 +1,10 @@
 const hre = require("hardhat");
 const { storeAddress, getFirstFileInBuildInfo } = require("./utils");
+const fs = require("fs").promises;
 
 async function main() {
+  await fs.unlink("contracts/MetaCoinSalted.sol");
+  await hre.run("compile");
   const feeData = await hre.ethers.provider.getFeeData();
   const Contract = await hre.ethers.getContractFactory("MetaCoin");
   const MetaCoin = await Contract.deploy({

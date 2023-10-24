@@ -21,6 +21,7 @@ async function appendTimestamp(file) {
 
 async function main() {
   await appendTimestamp("contracts/MetaCoinSalted.sol");
+  await fs.unlink("contracts/MetaCoin.sol");
   await hre.run("compile");
 
   const feeData = await hre.ethers.provider.getFeeData();

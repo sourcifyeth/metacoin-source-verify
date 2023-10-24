@@ -11,17 +11,29 @@ const readdir = util.promisify(fsAsync.readdir);
 async function getFirstFileInBuildInfo() {
   try {
     // Get the file names in the build-info directory
-    const files = await readdir("./artifacts/build-info");
+    const directory = "./artifacts/build-info";
+    const files = (await readdir(directory)).filter((f) => f.includes(".json"));
 
-    // Get the first file name
-    const firstFile = files[0];
-
-    // If there's a file, log it
-    if (firstFile) {
-      return firstFile;
-    } else {
+    if (!files.length) {
       console.log("No files found in build-info.");
+      return;
     }
+
+    // Get the stats for each file
+    const statsPromises = files.map((file) => fs.stat(`${directory}/${file}`));
+    const fileStats = await Promise.all(statsPromises);
+
+    // Pair each file name with its modification time
+    const fileTimePairs = files.map((file, index) => ({
+      file,
+      timestamp: fileStats[index].mtime.getTime(),
+    }));
+
+    // Sort based on the modification time
+    fileTimePairs.sort((a, b) => b.timestamp - a.timestamp);
+
+    // Get the most recent file
+    return fileTimePairs[0].file;
   } catch (error) {
     // If there's an error, log it
     console.error(
@@ -62,3 +74,5 @@ module.exports = {
   storeAddress,
   getFirstFileInBuildInfo,
 };
+
+getFirstFileInBuildInfo();
