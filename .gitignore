@@ -9,5 +9,6 @@ typechain-types
 cache
 artifacts
 
-./MetaCoin.json
-./MetaCoinSalted.json
+MetaCoin.json
+MetaCoinSalted.json
+saved.json

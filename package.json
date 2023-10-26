@@ -17,11 +17,13 @@
     "@nomicfoundation/hardhat-verify": "^1.0.0",
     "@typechain/ethers-v6": "^0.4.0",
     "@typechain/hardhat": "^8.0.0",
+    "assert": "^2.1.0",
     "chai": "^4.2.0",
     "dotenv": "^16.3.1",
     "ethers": "^6.7.1",
     "hardhat": "^2.16.1",
     "hardhat-gas-reporter": "^1.0.8",
+    "node-fetch": "^2.6.6",
     "solidity-coverage": "^0.8.0",
     "typechain": "^8.1.0"
   }
