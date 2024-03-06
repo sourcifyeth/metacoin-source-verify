@@ -7,7 +7,9 @@
     "deploy:sepolia": "hardhat run scripts/1_deploy_contracts.js --network sepolia",
     "deploy-with-salt:sepolia": "hardhat run scripts/2_deploy_salted.js --network sepolia",
     "deploy:goerli": "hardhat run scripts/1_deploy_contracts.js --network goerli",
-    "deploy-with-salt:goerli": "hardhat run scripts/2_deploy_salted.js --network goerli"
+    "deploy-with-salt:goerli": "hardhat run scripts/2_deploy_salted.js --network goerli",
+    "deploy:holesky": "hardhat run scripts/1_deploy_contracts.js --network holesky",
+    "deploy-with-salt:holesky": "hardhat run scripts/2_deploy_salted.js --network holesky"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",

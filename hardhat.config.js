@@ -9,6 +9,7 @@ const goerliURL = `https://eth-goerli.g.alchemy.com/v2/${
 const sepoliaURL = `https://eth-sepolia.g.alchemy.com/v2/${
   process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY
 } `;
+const holeskyURL = `https://rpc.holesky.ethpandaops.io/`;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -22,6 +23,11 @@ module.exports = {
     goerli: {
       chainId: 5,
       url: goerliURL,
+      accounts: [privateKey],
+    },
+    holesky: {
+      chainId: 17000,
+      url: holeskyURL,
       accounts: [privateKey],
     },
   },

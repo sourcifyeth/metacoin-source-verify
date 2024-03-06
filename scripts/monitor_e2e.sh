@@ -8,7 +8,7 @@ if [ "$CIRCLE_BRANCH" == "master" ]; then
     export SERVER_URL="https://sourcify.dev/server/"
 fi
 
-# Publishes sources to IPFS and deploys contracts to Goerli or Sepolia
+# Publishes sources to IPFS and deploys contracts to Goerli or Sepolia or Holesky
 # Account key and Infura project ID are Circle CI env variable settings.
 npm run deploy:$CHAIN_NAME || exit 1
 
