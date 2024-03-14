@@ -21,11 +21,19 @@ async function appendTimestamp(file) {
 
 async function main() {
   await appendTimestamp("contracts/MetaCoinSalted.sol");
+
   // To make sure the unsalted one does not get picked up
   await fs.unlink("contracts/MetaCoin.sol");
-  await hre.run("compile");
 
+  console.log("Compiling contracts...");
+  await hre.run("compile");
+  console.log("Contracts compiled successfully.");
+
+  console.log("Fetching fee data...");
   const feeData = await hre.ethers.provider.getFeeData();
+  console.log("Fee data fetched ", feeData);
+
+  console.log("Deploying MetaCoinSalted contract...");
   const Contract = await hre.ethers.getContractFactory("MetaCoinSalted");
   const MetaCoinSalted = await Contract.deploy({
     maxPriorityFeePerGas: feeData.maxPriorityFeePerGas,
@@ -33,17 +41,18 @@ async function main() {
     type: 2,
   });
   await MetaCoinSalted.waitForDeployment();
+  console.log("MetaCoinSalted contract deployed successfully.");
 
   const address = await MetaCoinSalted.target;
-  const buildInfoFilename = await getFirstFileInBuildInfo();
+  console.log(`MetaCoinSalted contract address: ${address}`);
 
-  await storeAddress(
-    "./MetaCoinSalted.json",
-    hre.network.config.chainId,
-    address,
-    buildInfoFilename
-  );
-  console.log(`MetaCoinSalted deployed at ${address}`);
+  console.log("Fetching build info filename...");
+  const buildInfoFilename = await getFirstFileInBuildInfo();
+  console.log(`Build info filename: ${buildInfoFilename}`);
+
+  console.log("Storing MetaCoinSalted contract address and build info...");
+  await storeAddress("./MetaCoinSalted.json", hre.network.config.chainId, address, buildInfoFilename);
+  console.log(`MetaCoinSalted deployed at ${address} and information stored successfully.`);
 }
 
 main().catch((error) => {
