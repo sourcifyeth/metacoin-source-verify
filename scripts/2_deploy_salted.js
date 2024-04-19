@@ -35,13 +35,36 @@ async function main() {
 
   console.log("Deploying MetaCoinSalted contract...");
   const Contract = await hre.ethers.getContractFactory("MetaCoinSalted");
-  const MetaCoinSalted = await Contract.deploy({
-    maxPriorityFeePerGas: feeData.maxPriorityFeePerGas,
-    maxFeePerGas: feeData.maxFeePerGas,
-    type: 2,
-  });
-  await MetaCoinSalted.waitForDeployment();
-  console.log("MetaCoinSalted contract deployed successfully.");
+  let MetaCoinSalted;
+  let deploymentSuccessful = false;
+  let retryCount = 0;
+  const DEPLOY_TIMEOUT = 300000;
+  const MAX_RETRY = 2;
+
+  // Sometimes deployment fails
+  while (!deploymentSuccessful && retryCount < MAX_RETRY) {
+    try {
+      const deployPromise = Contract.deploy({
+        maxPriorityFeePerGas: feeData.maxPriorityFeePerGas,
+        maxFeePerGas: feeData.maxFeePerGas,
+        type: 2,
+      }).then((instance) => instance.waitForDeployment());
+
+      const timeoutPromise = new Promise((resolve, reject) => {
+        setTimeout(() => reject(new Error("Deployment timed out after 5 minutes")), DEPLOY_TIMEOUT);
+      });
+
+      MetaCoinSalted = await Promise.race([deployPromise, timeoutPromise]);
+      deploymentSuccessful = true;
+      console.log("MetaCoin contract deployed successfully.");
+    } catch (error) {
+      console.error("Deployment failed or timed out. Retrying...");
+      retryCount++;
+    }
+  }
+  if (!deploymentSuccessful) {
+    throw new Error("Deployment failed or timed out after 2 attempts.");
+  }
 
   const address = await MetaCoinSalted.target;
   console.log(`MetaCoinSalted contract address: ${address}`);
