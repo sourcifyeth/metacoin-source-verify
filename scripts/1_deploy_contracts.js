@@ -19,7 +19,7 @@ async function main() {
   let deploymentSuccessful = false;
   let retryCount = 0;
   const DEPLOY_TIMEOUT = 300000;
-  const MAX_RETRY = 2;
+  const MAX_RETRY = 5;
 
   // Sometimes deployment fails
   while (!deploymentSuccessful && retryCount < MAX_RETRY) {
@@ -38,12 +38,12 @@ async function main() {
       deploymentSuccessful = true;
       console.log("MetaCoin contract deployed successfully.");
     } catch (error) {
-      console.error("Deployment failed or timed out. Retrying...");
+      console.error("Deployment failed:", error);
       retryCount++;
     }
   }
   if (!deploymentSuccessful) {
-    throw new Error("Deployment failed or timed out after 2 attempts.");
+    throw new Error(`Deployment failed or timed out after ${retryCount} attempts.`);
   }
 
   const address = await MetaCoin.target;
