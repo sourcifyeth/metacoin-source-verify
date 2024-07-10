@@ -22,9 +22,6 @@ async function appendTimestamp(file) {
 async function main() {
   await appendTimestamp("contracts/MetaCoinSalted.sol");
 
-  // To make sure the unsalted one does not get picked up
-  await fs.unlink("contracts/MetaCoin.sol");
-
   console.log("Compiling contracts...");
   await hre.run("compile");
   console.log("Contracts compiled successfully.");

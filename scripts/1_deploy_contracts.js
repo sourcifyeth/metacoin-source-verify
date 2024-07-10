@@ -3,8 +3,6 @@ const { storeAddress, getFirstFileInBuildInfo } = require("./utils");
 const fs = require("fs").promises;
 
 async function main() {
-  // To make sure the salted one does not get picked up
-  await fs.unlink("contracts/MetaCoinSalted.sol");
   console.log("Compiling contracts...");
   await hre.run("compile");
   console.log("Contracts compiled successfully.");
