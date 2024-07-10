@@ -3,13 +3,9 @@ require("dotenv").config();
 
 const privateKey = process.env.PRIVATE_KEY;
 
-const goerliURL = `https://eth-goerli.g.alchemy.com/v2/${
-  process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY
-}`;
-const sepoliaURL = `https://eth-sepolia.g.alchemy.com/v2/${
-  process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY
-} `;
-const holeskyURL = `https://rpc.holesky.ethpandaops.io/`;
+const goerliURL = `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY}`;
+const sepoliaURL = `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY} `;
+const holeskyURL = `https://eth-holesky.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY} `;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
