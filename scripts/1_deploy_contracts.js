@@ -7,9 +7,9 @@ async function main() {
   await hre.run("compile");
   console.log("Contracts compiled successfully.");
 
-  console.log("Fetching fee data...");
-  const feeData = await hre.ethers.provider.getFeeData();
-  console.log("Fee data fetched ", feeData);
+  // console.log("Fetching fee data...");
+  // const feeData = await hre.ethers.provider.getFeeData();
+  // console.log("Fee data fetched ", feeData);
 
   console.log("Deploying MetaCoin contract...");
   const Contract = await hre.ethers.getContractFactory("MetaCoin");
@@ -21,12 +21,12 @@ async function main() {
 
   // Sometimes deployment fails
   while (!deploymentSuccessful && retryCount < MAX_RETRY) {
+    console.log(`Deployment attempt ${retryCount + 1} of ${MAX_RETRY}`);
     try {
-      const deployPromise = Contract.deploy({
-        maxPriorityFeePerGas: feeData.maxPriorityFeePerGas,
-        maxFeePerGas: feeData.maxFeePerGas,
-        type: 2,
-      }).then((instance) => instance.waitForDeployment());
+      const baseContract = await Contract.deploy();
+      const deployTx = await baseContract.deploymentTransaction();
+      console.log(`Deploying contract with tx: ${deployTx.hash}`);
+      const deployPromise = baseContract.waitForDeployment();
 
       const timeoutPromise = new Promise((resolve, reject) => {
         setTimeout(() => reject(new Error("Deployment timed out after 5 minutes")), DEPLOY_TIMEOUT);
@@ -45,14 +45,14 @@ async function main() {
   }
 
   const address = await MetaCoin.target;
-  console.log(`MetaCoinSalted contract address: ${address}`);
+  console.log(`MetaCoin contract address: ${address}`);
 
   console.log("Fetching build info filename...");
   const buildInfoFilename = await getFirstFileInBuildInfo();
   console.log(`Build info filename: ${buildInfoFilename}`);
 
   await storeAddress("./MetaCoin.json", hre.network.config.chainId, address, buildInfoFilename);
-  console.log(`MetaCoinSalted deployed at ${address} and information stored successfully.`);
+  console.log(`MetaCoin deployed at ${address} and information stored successfully.`);
 }
 
 main().catch((error) => {
