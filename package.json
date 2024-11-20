@@ -23,7 +23,7 @@
     "chai": "^4.2.0",
     "dotenv": "^16.3.1",
     "ethers": "^6.13.2",
-    "hardhat": "^2.22.8",
+    "hardhat": "^2.22.16",
     "hardhat-gas-reporter": "^1.0.8",
     "node-fetch": "^2.6.6",
     "solidity-coverage": "^0.8.0",
