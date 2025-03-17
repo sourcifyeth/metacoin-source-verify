@@ -3,7 +3,6 @@ require("dotenv").config();
 
 const privateKey = process.env.PRIVATE_KEY;
 
-const goerliURL = `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY}`;
 const sepoliaURL = `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY} `;
 const holeskyURL = `https://eth-holesky.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY} `;
 
@@ -14,11 +13,6 @@ module.exports = {
     sepolia: {
       chainId: 11155111,
       url: sepoliaURL,
-      accounts: [privateKey],
-    },
-    goerli: {
-      chainId: 5,
-      url: goerliURL,
       accounts: [privateKey],
     },
     holesky: {
