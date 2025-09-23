@@ -5,6 +5,7 @@ const privateKey = process.env.PRIVATE_KEY;
 
 const sepoliaURL = `https://eth-sepolia.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY} `;
 const holeskyURL = `https://eth-holesky.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY} `;
+const hoodiURL = `https://eth-hoodi.g.alchemy.com/v2/${process.env.ALCHEMY_ID || process.env.ALCHEMY_API_KEY}`;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -18,6 +19,11 @@ module.exports = {
     holesky: {
       chainId: 17000,
       url: holeskyURL,
+      accounts: [privateKey],
+    },
+    hoodi: {
+      chainId: 560048,
+      url: hoodiURL,
       accounts: [privateKey],
     },
   },
