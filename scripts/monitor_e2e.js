@@ -9,7 +9,6 @@
 
 require("dotenv").config();
 const assert = require("assert");
-const fetch = require("node-fetch");
 const util = require("util");
 const log = console.log;
 
@@ -24,7 +23,8 @@ const artifact = require("../MetaCoin.json");
 const address = artifact.networks[chainID].address;
 
 async function main() {
-  const url = `${process.env.SERVER_URL}/repository/contracts/full_match/${chainID}/${address}/metadata.json`;
+  const baseUrl = process.env.SERVER_URL.replace(/\/+$/, "");
+  const url = `${baseUrl}/v2/contract/${chainID}/${address}?fields=metadata`;
 
   log();
   log(`>>>>>>>>>>>>>>>>>>>>`);
@@ -35,11 +35,22 @@ async function main() {
   const res = await fetch(url);
   const text = await res.text();
 
-  let metadata;
+  // The v2 API returns 404 (with an error body) until the monitor has picked
+  // up and verified the contract.
+  if (!res.ok) {
+    throw new Error(`Contract not verified yet (HTTP ${res.status}): ${text}`);
+  }
+
+  let contract;
   try {
-    metadata = JSON.parse(text);
+    contract = JSON.parse(text);
   } catch (err) {
-    throw new Error("Metadata not found in repository...");
+    throw new Error("Could not parse contract response from server...");
+  }
+
+  const metadata = contract.metadata;
+  if (!metadata) {
+    throw new Error("Metadata not found in response...");
   }
 
   assert(metadata.compiler.version !== undefined);

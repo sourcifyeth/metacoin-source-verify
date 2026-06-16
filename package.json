@@ -3,6 +3,9 @@
   "version": "2.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "deploy:sepolia": "hardhat run scripts/1_deploy_contracts.js --network sepolia",
     "deploy-with-salt:sepolia": "hardhat run scripts/2_deploy_salted.js --network sepolia",
@@ -25,7 +28,6 @@
     "ethers": "^6.13.2",
     "hardhat": "^2.22.16",
     "hardhat-gas-reporter": "^1.0.8",
-    "node-fetch": "^2.6.6",
     "solidity-coverage": "^0.8.0",
     "typechain": "^8.1.0"
   }
