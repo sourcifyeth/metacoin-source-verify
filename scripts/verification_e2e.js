@@ -1,6 +1,5 @@
 const assert = require("assert");
 require("dotenv").config();
-const fetch = require("node-fetch");
 
 const deploymentChain = process.argv[2];
 assert(deploymentChain, "No chain provided");
@@ -122,30 +121,7 @@ async function main() {
     `Match should be ${EXPECTED_MATCH}. Actual: ${contract.match}`
   );
 
-  // Store verified contract in the CircleCI artifacts
-  const fs = require("fs");
-  const verifiedContractPath = "./verified-contracts";
-  const verifiedContractFile = `${verifiedContractPath}/saved.json`;
-
-  try {
-    fs.mkdirSync(`${verifiedContractPath}`, { recursive: true });
-    fs.writeFileSync(
-      verifiedContractFile,
-      JSON.stringify({
-        deploymentAddress,
-        deploymentChain,
-      })
-    );
-  } catch (err) {
-    console.error("Cannot write artifacts", err);
-  }
-
-  assert(
-    fs.existsSync(verifiedContractFile),
-    "Verified contract file was not saved"
-  );
-
-  console.log(`Verified contract saved in ${verifiedContractFile}`);
+  console.log(`Verified contract ${deploymentAddress} on chain ${deploymentChain}`);
 }
 
 main().catch((err) => {

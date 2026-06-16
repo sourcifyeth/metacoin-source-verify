@@ -9,7 +9,6 @@
 
 require("dotenv").config();
 const assert = require("assert");
-const fetch = require("node-fetch");
 const util = require("util");
 const log = console.log;
 
